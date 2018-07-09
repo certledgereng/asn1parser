@@ -9,21 +9,25 @@ namespace Asn1ParserContract
     {
         public static void Main()
         {
-            byte[] validityDataBytes = new byte[] { 0x30, 0x1E, 0x17, 0x0D, 0x31, 0x32, 0x30, 0x34, 0x32, 0x37, 0x31, 0x30, 0x33, 0x31, 0x31, 0x38, 0x5A, 0x17, 0x0D, 0x32, 0x32, 0x30, 0x34, 0x32, 0x35, 0x31, 0x30, 0x33, 0x31, 0x31, 0x38, 0x5A };
-            Storage.Put(Storage.CurrentContext, "Validity Data Encoded", validityDataBytes);
+            byte[] dataBytes = new byte[] { 0x30, 0x1E, 0x17, 0x0D, 0x31, 0x32, 0x30, 0x34, 0x32, 0x37, 0x31, 0x30, 0x33, 0x31, 0x31, 0x38, 0x5A, 0x17, 0x0D, 0x32, 0x32, 0x30, 0x34, 0x32, 0x35, 0x31, 0x30, 0x33, 0x31, 0x31, 0x38, 0x5A };
+            Asn1Logger.LogByteArray("Encoded Validity: ", dataBytes);
 
-            Asn1Data asn1Data = Asn1Parser.ParseFromRawData(validityDataBytes);
+            Asn1Data asn1Data = Asn1Parser.ParseFromRawData(dataBytes);
 
             bool isMovedNext = Asn1Parser.MoveNext(asn1Data);
             if (isMovedNext)
             {
                 byte[] notBeforeByte = Asn1Utils.DecodeDateTime(asn1Data);
                 Storage.Put(Storage.CurrentContext, "notBefore", notBeforeByte);
+                Asn1Logger.LogCurrentNodeValues(asn1Data, "notBefore");
+               // Asn1Logger.LogByteArray("Validity-NotBefore: ", notBeforeByte);
                 isMovedNext = Asn1Parser.MoveNext(asn1Data);
                 if (isMovedNext)
                 {
                   byte [] notAfterByte = Asn1Utils.DecodeDateTime(asn1Data);
-                    Storage.Put(Storage.CurrentContext, "notAfter", notAfterByte);
+                    Storage.Put(Storage.CurrentContext, "notAfter", notBeforeByte);
+                    Asn1Logger.LogCurrentNodeValues(asn1Data, "notAfter");
+                    //Asn1Logger.LogByteArray("Validity-NotAfter: ", notAfterByte);
                 }
                 else
                 {

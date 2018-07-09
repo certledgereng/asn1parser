@@ -54,8 +54,6 @@
     <Compile Include="asn1\Asn1Type.cs" />
     <Compile Include="asn1\Asn1Utils.cs" />
     <Compile Include="asn1\AsnInternalMap.cs" />
-    <Compile Include="asn1\time\Asn1GeneralizedTimeParser.cs" />
-    <Compile Include="asn1\time\Asn1UtcTimeParser.cs" />
     <Compile Include="asn1\utils\Asn1Logger.cs" />
     <Compile Include="asn1\utils\DatetimeUtils.cs" />
     <Compile Include="Logger.cs" />

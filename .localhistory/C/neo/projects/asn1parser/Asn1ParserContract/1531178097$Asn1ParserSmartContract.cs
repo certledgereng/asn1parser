@@ -23,7 +23,7 @@ namespace Asn1ParserContract
                 if (isMovedNext)
                 {
                   byte [] notAfterByte = Asn1Utils.DecodeDateTime(asn1Data);
-                    Storage.Put(Storage.CurrentContext, "notAfter", notAfterByte);
+                    Storage.Put(Storage.CurrentContext, "notAfter", notBeforeByte);
                 }
                 else
                 {
